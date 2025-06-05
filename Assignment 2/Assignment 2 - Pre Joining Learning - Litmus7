@@ -1,1 +1,161 @@
-second assignemnt
+Part1:
+
+mysql> create database store;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use store;
+Database changed
+
+mysql> use store;
+Database changed
+mysql> create table customers (CustomerID int primary key, Name varchar(100),
+    -> Email varchar(100), City varchar(50),SignupDate date);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> describe customers;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| CustomerID | int          | NO   | PRI | NULL    |       |
+| Name       | varchar(100) | YES  |     | NULL    |       |
+| Email      | varchar(100) | YES  |     | NULL    |       |
+| City       | varchar(50)  | YES  |     | NULL    |       |
+| SignupDate | date         | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> create table orders(OrderID int primary key, CustomerID int, OrderDate date, TotalAmount decimal(10,2),foreign key(CustomerID) references customers(CustomerID));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> describe orders;
++-------------+---------------+------+-----+---------+-------+
+| Field       | Type          | Null | Key | Default | Extra |
++-------------+---------------+------+-----+---------+-------+
+| OrderID     | int           | NO   | PRI | NULL    |       |
+| CustomerID  | int           | YES  | MUL | NULL    |       |
+| OrderDate   | date          | YES  |     | NULL    |       |
+| TotalAmount | decimal(10,2) | YES  |     | NULL    |       |
++-------------+---------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> create table products(ProductID int primary key, ProductName varchar(100), Category varchar(50), Price decimal(10,2));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> describe products;
++-------------+---------------+------+-----+---------+-------+
+| Field       | Type          | Null | Key | Default | Extra |
++-------------+---------------+------+-----+---------+-------+
+| ProductID   | int           | NO   | PRI | NULL    |       |
+| ProductName | varchar(100)  | YES  |     | NULL    |       |
+| Category    | varchar(50)   | YES  |     | NULL    |       |
+| Price       | decimal(10,2) | YES  |     | NULL    |       |
++-------------+---------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> create table orderdetails(OrderDetailID int primary key, OrderID int, ProductID int, Quantity int, Price decimal(10,2), foreign key(OrderID) references orders(OrderID),foreign key(ProductID) references Products(ProductID));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> describe orderdetails;
++---------------+---------------+------+-----+---------+-------+
+| Field         | Type          | Null | Key | Default | Extra |
++---------------+---------------+------+-----+---------+-------+
+| OrderDetailID | int           | NO   | PRI | NULL    |       |
+| OrderID       | int           | YES  | MUL | NULL    |       |
+| ProductID     | int           | YES  | MUL | NULL    |       |
+| Quantity      | int           | YES  |     | NULL    |       |
+| Price         | decimal(10,2) | YES  |     | NULL    |       |
++---------------+---------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> insert into customers values
+    -> (1, 'Customer1', 'cusone@order.com', 'Kochi', '2021-01-10'),
+    -> (2, 'Customer2', 'custwo@order.com', 'Ernakulam', '2022-02-11'),
+    -> (3, 'Customer3', 'custhree@order.com', 'Kottayam', '2023-03-12'),
+    -> (4, 'Customer4', 'cusfour@order.com', 'Kollam', '2024-04-13’');
+Query OK, 4 rows affected, 1 warning (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 1
+
+mysql> select * from customers;
++------------+-----------+--------------------+-----------+------------+
+| CustomerID | Name      | Email              | City      | SignupDate |
++------------+-----------+--------------------+-----------+------------+
+|          1 | Customer1 | cusone@order.com   | Kochi     | 2021-01-10 |
+|          2 | Customer2 | custwo@order.com   | Ernakulam | 2022-02-11 |
+|          3 | Customer3 | custhree@order.com | Kottayam  | 2023-03-12 |
+|          4 | Customer4 | cusfour@order.com  | Kollam    | 2024-04-13 |
++------------+-----------+--------------------+-----------+------------+
+4 rows in set (0.00 sec)
+
+
+mysql> insert into products values
+    -> (101, 'Mouse', 'Computer Devices', 25.99),
+    -> (102, 'Speaker', 'Audio Devices', 49.95),
+    -> (103, 'Sneakers', 'Footwear', 79.50),
+    -> (104, 'Toaster', 'Appliances', 89.00),
+    -> (105, 'Boots', 'Footwear', 20.00);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from products;
++-----------+-------------+------------------+-------+
+| ProductID | ProductName | Category         | Price |
++-----------+-------------+------------------+-------+
+|       101 | Mouse       | Computer Devices | 25.99 |
+|       102 | Speaker     | Audio Devices    | 49.95 |
+|       103 | Sneakers    | Footwear         | 79.50 |
+|       104 | Toaster     | Appliances       | 89.00 |
+|       105 | Boots       | Footwear         | 20.00 |
++-----------+-------------+------------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> update products set Price=2234.99 where ProductID=102;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update products set Price=12234.99 where ProductID=103;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update products set Price=4999.99 where ProductID=104;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update products set Price=7899.99 where ProductID=105;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from products;
++-----------+-------------+------------------+----------+
+| ProductID | ProductName | Category         | Price    |
++-----------+-------------+------------------+----------+
+|       101 | Mouse       | Computer Devices |  1234.99 |
+|       102 | Speaker     | Audio Devices    |  2234.99 |
+|       103 | Sneakers    | Footwear         | 12234.99 |
+|       104 | Toaster     | Appliances       |  4999.99 |
+|       105 | Boots       | Footwear         |  7899.99 |
++-----------+-------------+------------------+----------+
+5 rows in set (0.00 sec)
+
+mysql> insert into customers values
+    ->    (5, 'Customer5', 'cusfive@order.com', 'Mumbai', '2021-02-15'),
+    ->  (6, 'Customer6', 'cussix@order.com', 'Mumbai', '2022-03-16'),
+    ->     (7, 'Customer7', 'cusseven@order.com', 'Mumbai', '2023-04-17'), (8, 'Customer8', 'cuseight@order.com', 'Kochi', '2024-05-18’');
+Query OK, 4 rows affected, 1 warning (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 1
+
+mysql> select * from customers;
++------------+-----------+--------------------+-----------+------------+
+| CustomerID | Name      | Email              | City      | SignupDate |
++------------+-----------+--------------------+-----------+------------+
+|          1 | Customer1 | cusone@order.com   | Kochi     | 2021-01-10 |
+|          2 | Customer2 | custwo@order.com   | Ernakulam | 2022-02-11 |
+|          3 | Customer3 | custhree@order.com | Kottayam  | 2023-03-12 |
+|          4 | Customer4 | cusfour@order.com  | Kollam    | 2024-04-13 |
+|          5 | Customer5 | cusfive@order.com  | Mumbai    | 2021-02-15 |
+|          6 | Customer6 | cussix@order.com   | Mumbai    | 2022-03-16 |
+|          7 | Customer7 | cusseven@order.com | Mumbai    | 2023-04-17 |
+|          8 | Customer8 | cuseight@order.com | Kochi     | 2024-05-18 |
++------------+-----------+--------------------+-----------+------------+
+8 rows in set (0.00 sec)
+
+
