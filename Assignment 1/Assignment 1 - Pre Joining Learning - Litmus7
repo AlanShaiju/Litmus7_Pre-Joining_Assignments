@@ -1,0 +1,84 @@
+Create a database for the university system:
+	
+mysql> create database university_db;
+Query OK, 1 row affected (0.05 sec)
+
+Use the University system database to make the tables:
+
+mysql> use university_db;
+Database changed
+
+Create tables for the university system:
+
+mysql> create table advisor (advisor_id int primary key, advisor_name varchar(20), advisor_mail varchar(30), specialization varchar(20));
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> create table student (student_id int primary key, student_name varchar(20), student_mail varchar(30), student_dob date, advisor_id int, foreign key(advisor_id) references advisor(advisor_id));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> create table courses (course_code int primary key, course_title varchar(20), course_description varchar(100), instructor_id int, foreign key (instructor_id) references advisor(advisor_id));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> create table registered_courses( student_id int, course_code int, primary key (student_id,course_code), foreign key (student_id) references student(student_id), foreign key(course_code) references courses(course_code));
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> show tables
+    -> ;
++-------------------------+
+| Tables_in_university_db |
++-------------------------+
+| advisor                 |
+| courses                 |
+| registered_courses      |
+| student                 |
++-------------------------+
+4 rows in set (0.02 sec)
+
+
+mysql> describe advisor;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| advisor_id     | int         | NO   | PRI | NULL    |       |
+| advisor_name   | varchar(20) | YES  |     | NULL    |       |
+| advisor_mail   | varchar(30) | YES  |     | NULL    |       |
+| specialization | varchar(20) | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> describe student;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| student_id   | int         | NO   | PRI | NULL    |       |
+| student_name | varchar(20) | YES  |     | NULL    |       |
+| student_mail | varchar(30) | YES  |     | NULL    |       |
+| student_dob  | date        | YES  |     | NULL    |       |
+| advisor_id   | int         | YES  | MUL | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> describe courses;
++--------------------+--------------+------+-----+---------+-------+
+| Field              | Type         | Null | Key | Default | Extra |
++--------------------+--------------+------+-----+---------+-------+
+| course_code        | int          | NO   | PRI | NULL    |       |
+| course_title       | varchar(20)  | YES  |     | NULL    |       |
+| course_description | varchar(100) | YES  |     | NULL    |       |
+| instructor_id      | int          | YES  | MUL | NULL    |       |
++--------------------+--------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> describe registered_courses;
++-------------+------+------+-----+---------+-------+
+| Field       | Type | Null | Key | Default | Extra |
++-------------+------+------+-----+---------+-------+
+| student_id  | int  | NO   | PRI | NULL    |       |
+| course_code | int  | NO   | PRI | NULL    |       |
++-------------+------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
+
+
+The ‘student’ table has ‘student_id’ as the primary key and ‘advisor_id’ as the foreign key, the foreign key references the ‘advisor’ table in the database. 
+The table ‘courses’ has the ‘course_code’ as the primary key, and it uses ‘instructor_id’ to reference the table ‘advisor’. 
+The table ‘registered_courses’ contains the courses registered by each student. The ‘registered_courses’ table uses the ‘student_id’ and ‘course_code’ together as the primary key and these attributes individually are used to reference the ‘student’ table and the ‘courses’ table respectively. 
