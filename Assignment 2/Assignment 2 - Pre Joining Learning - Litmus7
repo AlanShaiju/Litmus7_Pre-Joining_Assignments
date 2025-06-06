@@ -158,4 +158,417 @@ mysql> select * from customers;
 +------------+-----------+--------------------+-----------+------------+
 8 rows in set (0.00 sec)
 
+mysql> insert into orders values
+    -> (1, 1, '2024-06-06', 8704.96),
+    -> (2, 2, '2024-07-06', 1234.99),
+    -> (3, 3, '2024-08-06', 25704.97),
+    -> (4, 4, '2025-01-06', 20134.98),
+    -> (5, 5, '2025-07-01', 12234.99),
+    -> (6, 6, '2025-07-16', 1234.99),
+    -> (7, 7, '2025-06-06', 4469.98),
+    -> (8, 8, '2025-06-06', 29469.97),
+    -> (9, 1, '2025-06-06', 44604.96),
+    -> (10, 2, '2025-06-06', 7899.99),
+    -> (11, 3, '2025-06-06', 1234.99),
+    -> (12, 4, '2025-06-06', 14469.98);
+Query OK, 12 rows affected (0.05 sec)
+Records: 12  Duplicates: 0  Warnings: 0
+
+mysql> select * from orders;
++---------+------------+------------+-------------+
+| OrderID | CustomerID | OrderDate  | TotalAmount |
++---------+------------+------------+-------------+
+|       1 |          1 | 2024-06-06 |     8704.96 |
+|       2 |          2 | 2024-07-06 |     1234.99 |
+|       3 |          3 | 2024-08-06 |    25704.97 |
+|       4 |          4 | 2025-01-06 |    20134.98 |
+|       5 |          5 | 2025-07-01 |    12234.99 |
+|       6 |          6 | 2025-07-16 |     1234.99 |
+|       7 |          7 | 2025-06-06 |     4469.98 |
+|       8 |          8 | 2025-06-06 |    29469.97 |
+|       9 |          1 | 2025-06-06 |    44604.96 |
+|      10 |          2 | 2025-06-06 |     7899.99 |
+|      11 |          3 | 2025-06-06 |     1234.99 |
+|      12 |          4 | 2025-06-06 |    14469.98 |
++---------+------------+------------+-------------+
+12 rows in set (0.00 sec)
+
+
+mysql> insert into orderdetails values
+    -> (1, 1, 101, 3, 3704.97),
+    -> (2, 1, 104, 1, 4999.99),
+    -> (3, 2, 101, 1, 1234.99),
+    -> (4, 3, 101, 1, 1234.99),
+    -> (5, 3, 103, 2, 24469.98),
+    -> (6, 4, 105, 1, 7899.99),
+    -> (7, 4, 103, 1, 12234.99),
+    -> (8, 5, 103, 1, 12234.99),
+    -> (9, 6, 101, 1, 1234.99),
+    -> (10, 7, 102, 2, 4469.98),
+    -> (11, 8, 104, 1, 4999.99),
+    -> (12, 8, 103, 2, 24469.98),
+    -> (13, 9, 105, 1, 7899.99),
+    -> (14, 9, 103, 3, 36704.97),
+    -> (15, 10, 105, 1, 7899.99),
+    -> (16, 11, 101, 1, 1234.99),
+    -> (17, 12, 102, 1, 2234.99),
+    -> (18, 12, 103, 1, 12234.99);
+Query OK, 18 rows affected (0.02 sec)
+Records: 18  Duplicates: 0  Warnings: 0
+
+mysql> select * from orderdetails;
++---------------+---------+-----------+----------+----------+
+| OrderDetailID | OrderID | ProductID | Quantity | Price    |
++---------------+---------+-----------+----------+----------+
+|             1 |       1 |       101 |        3 |  3704.97 |
+|             2 |       1 |       104 |        1 |  4999.99 |
+|             3 |       2 |       101 |        1 |  1234.99 |
+|             4 |       3 |       101 |        1 |  1234.99 |
+|             5 |       3 |       103 |        2 | 24469.98 |
+|             6 |       4 |       105 |        1 |  7899.99 |
+|             7 |       4 |       103 |        1 | 12234.99 |
+|             8 |       5 |       103 |        1 | 12234.99 |
+|             9 |       6 |       101 |        1 |  1234.99 |
+|            10 |       7 |       102 |        2 |  4469.98 |
+|            11 |       8 |       104 |        1 |  4999.99 |
+|            12 |       8 |       103 |        2 | 24469.98 |
+|            13 |       9 |       105 |        1 |  7899.99 |
+|            14 |       9 |       103 |        3 | 36704.97 |
+|            15 |      10 |       105 |        1 |  7899.99 |
+|            16 |      11 |       101 |        1 |  1234.99 |
+|            17 |      12 |       102 |        1 |  2234.99 |
+|            18 |      12 |       103 |        1 | 12234.99 |
++---------------+---------+-----------+----------+----------+
+18 rows in set (0.00 sec)
+
+
+
+Part 2
+
+1. Get the list of all customers.
+
+mysql> select * from customers;
++------------+-----------+--------------------+-----------+------------+
+| CustomerID | Name      | Email              | City      | SignupDate |
++------------+-----------+--------------------+-----------+------------+
+|          1 | Customer1 | cusone@order.com   | Kochi     | 2021-01-10 |
+|          2 | Customer2 | custwo@order.com   | Ernakulam | 2022-02-11 |
+|          3 | Customer3 | custhree@order.com | Kottayam  | 2023-03-12 |
+|          4 | Customer4 | cusfour@order.com  | Kollam    | 2024-04-13 |
+|          5 | Customer5 | cusfive@order.com  | Mumbai    | 2021-02-15 |
+|          6 | Customer6 | cussix@order.com   | Mumbai    | 2022-03-16 |
+|          7 | Customer7 | cusseven@order.com | Mumbai    | 2023-04-17 |
+|          8 | Customer8 | cuseight@order.com | Kochi     | 2024-05-18 |
++------------+-----------+--------------------+-----------+------------+
+8 rows in set (0.00 sec)
+
+2. Find all orders placed in the last 30 days.
+
+mysql> select * from orders where OrderDate>=curdate() - interval 30 day;
++---------+------------+------------+-------------+
+| OrderID | CustomerID | OrderDate  | TotalAmount |
++---------+------------+------------+-------------+
+|       5 |          5 | 2025-07-01 |    12234.99 |
+|       6 |          6 | 2025-07-16 |     1234.99 |
+|       7 |          7 | 2025-06-06 |     4469.98 |
+|       8 |          8 | 2025-06-06 |    29469.97 |
+|       9 |          1 | 2025-06-06 |    44604.96 |
+|      10 |          2 | 2025-06-06 |     7899.99 |
+|      11 |          3 | 2025-06-06 |     1234.99 |
+|      12 |          4 | 2025-06-06 |    14469.98 |
++---------+------------+------------+-------------+
+8 rows in set (0.01 sec)
+
+
+
+3. Show product names and their prices.
+
+mysql> select ProductName, Price from products;
++-------------+----------+
+| ProductName | Price    |
++-------------+----------+
+| Mouse       |  1234.99 |
+| Speaker     |  2234.99 |
+| Sneakers    | 12234.99 |
+| Toaster     |  4999.99 |
+| Boots       |  7899.99 |
++-------------+----------+
+5 rows in set (0.00 sec)
+
+
+4. Find the total number of products in each category.
+
+mysql> select count(*) as number_of_products,Category from products group by Category;
++--------------------+------------------+
+| number_of_products | Category         |
++--------------------+------------------+
+|                  1 | Computer Devices |
+|                  1 | Audio Devices    |
+|                  2 | Footwear         |
+|                  1 | Appliances       |
++--------------------+------------------+
+4 rows in set (0.01 sec)
+
+Filtering and Conditions
+
+5. Get all customers from the city 'Mumbai'.
+
+mysql> select Name from customers where City='Mumbai';
++-----------+
+| Name      |
++-----------+
+| Customer5 |
+| Customer6 |
+| Customer7 |
++-----------+
+3 rows in set (0.00 sec)
+
+
+6. Find orders with a total amount greater than ₹5000.
+
+mysql> select * from orders where TotalAmount>5000;
++---------+------------+------------+-------------+
+| OrderID | CustomerID | OrderDate  | TotalAmount |
++---------+------------+------------+-------------+
+|       1 |          1 | 2024-06-06 |     8704.96 |
+|       3 |          3 | 2024-08-06 |    25704.97 |
+|       4 |          4 | 2025-01-06 |    20134.98 |
+|       5 |          5 | 2025-07-01 |    12234.99 |
+|       8 |          8 | 2025-06-06 |    29469.97 |
+|       9 |          1 | 2025-06-06 |    44604.96 |
+|      10 |          2 | 2025-06-06 |     7899.99 |
+|      12 |          4 | 2025-06-06 |    14469.98 |
++---------+------------+------------+-------------+
+8 rows in set (0.00 sec)
+
+
+7. List customers who signed up after '2024-01-01'.
+
+mysql> select * from customers where SignupDate>'2024-01-01';
++------------+-----------+--------------------+--------+------------+
+| CustomerID | Name      | Email              | City   | SignupDate |
++------------+-----------+--------------------+--------+------------+
+|          4 | Customer4 | cusfour@order.com  | Kollam | 2024-04-13 |
+|          8 | Customer8 | cuseight@order.com | Kochi  | 2024-05-18 |
++------------+-----------+--------------------+--------+------------+
+2 rows in set (0.00 sec)
+
+
+
+Joins
+
+8. Show all orders along with the customer's name.
+
+mysql> select OrderID, Name from customers join orders on customers.CustomerID=orders.CustomerID;
++---------+-----------+
+| OrderID | Name      |
++---------+-----------+
+|       1 | Customer1 |
+|       9 | Customer1 |
+|       2 | Customer2 |
+|      10 | Customer2 |
+|       3 | Customer3 |
+|      11 | Customer3 |
+|       4 | Customer4 |
+|      12 | Customer4 |
+|       5 | Customer5 |
+|       6 | Customer6 |
+|       7 | Customer7 |
+|       8 | Customer8 |
++---------+-----------+
+12 rows in set (0.01 sec)
+
+
+
+9. List products purchased in each order.
+
+mysql> select OrderID, ProductName from orderdetails join products on orderdetails.ProductID=products.ProductID order by OrderID;
++---------+-------------+
+| OrderID | ProductName |
++---------+-------------+
+|       1 | Mouse       |
+|       1 | Toaster     |
+|       2 | Mouse       |
+|       3 | Mouse       |
+|       3 | Sneakers    |
+|       4 | Sneakers    |
+|       4 | Boots       |
+|       5 | Sneakers    |
+|       6 | Mouse       |
+|       7 | Speaker     |
+|       8 | Sneakers    |
+|       8 | Toaster     |
+|       9 | Sneakers    |
+|       9 | Boots       |
+|      10 | Boots       |
+|      11 | Mouse       |
+|      12 | Speaker     |
+|      12 | Sneakers    |
++---------+-------------+
+18 rows in set (0.02 sec)
+
+
+
+10. Find customers who have never placed an order.
+
+mysql> select CustomerID from customers where CustomerID not in (select CustomerID from orders);
+Empty set (0.02 sec)
+
+
+Aggregation and Grouping
+
+11. Find the total amount spent by each customer.
+
+mysql> select CustomerID,sum(TotalAmount) as TotalExpenditure from orders group by CustomerID;
++------------+------------------+
+| CustomerID | TotalExpenditure |
++------------+------------------+
+|          1 |         53309.92 |
+|          2 |          9134.98 |
+|          3 |         26939.96 |
+|          4 |         34604.96 |
+|          5 |         12234.99 |
+|          6 |          1234.99 |
+|          7 |          4469.98 |
+|          8 |         29469.97 |
++------------+------------------+
+8 rows in set (0.00 sec)
+
+
+
+12. Which product has been sold the most (by quantity)?
+mysql> select ProductId, ProductName from products where ProductID=(select ProductID from orderdetails group by ProductID order by sum(Quantity) desc limit 1);
++-----------+-------------+
+| ProductId | ProductName |
++-----------+-------------+
+|       103 | Sneakers    |
++-----------+-------------+
+1 row in set (0.00 sec)
+
+13. Find the average order value for each customer.
+
+mysql> select CustomerID, avg(TotalAmount) as Average_Order_Value from orders group by CustomerID;
++------------+---------------------+
+| CustomerID | Average_Order_Value |
++------------+---------------------+
+|          1 |        26654.960000 |
+|          2 |         4567.490000 |
+|          3 |        13469.980000 |
+|          4 |        17302.480000 |
+|          5 |        12234.990000 |
+|          6 |         1234.990000 |
+|          7 |         4469.980000 |
+|          8 |        29469.970000 |
++------------+---------------------+
+8 rows in set (0.00 sec)
+
+14. Total sales amount per product category.
+
+mysql> select Category, sum(orderdetails.Price) as Sales from orderdetails join products on orderdetails.ProductID=products.ProductID group by Category;
++------------------+-----------+
+| Category         | Sales     |
++------------------+-----------+
+| Computer Devices |   8644.93 |
+| Audio Devices    |   6704.97 |
+| Footwear         | 146049.87 |
+| Appliances       |   9999.98 |
++------------------+-----------+
+4 rows in set (0.00 sec)
+
+
+
+
+Subqueries
+
+15. Find customers who spent more than the average spending.
+
+mysql> select CustomerID,sum(TotalAmount) as Total from orders group by CustomerID having sum(TotalAmount)> (select avg(TotalSpent) from (select CustomerID, sum(TotalAmount) as TotalSpent from orders group by CustomerID) as CustomerTotals);
++------------+----------+
+| CustomerID | Total    |
++------------+----------+
+|          1 | 53309.92 |
+|          3 | 26939.96 |
+|          4 | 34604.96 |
+|          8 | 29469.97 |
++------------+----------+
+4 rows in set (0.01 sec)
+
+16. List products that have never been ordered.
+
+mysql> select ProductID from orderdetails where ProductID not in (select ProductID from products);
+Empty set (0.00 sec)
+
+17. Find the most recent order for each customer.
+
+mysql> select CustomerID, max(OrderDate) as Latest from orders group by CustomerID order by CustomerID;
++------------+------------+
+| CustomerID | Latest     |
++------------+------------+
+|          1 | 2025-06-06 |
+|          2 | 2025-06-06 |
+|          3 | 2025-06-06 |
+|          4 | 2025-06-06 |
+|          5 | 2025-07-01 |
+|          6 | 2025-07-16 |
+|          7 | 2025-06-06 |
+|          8 | 2025-06-06 |
++------------+------------+
+8 rows in set (0.00 sec)
+
+
+
+
+Advanced Queries
+
+18. Rank customers by total spending (highest first).
+
+mysql> select CustomerID, sum(TotalAmount) as Expenditure, rank() over (order by sum(TotalAmount) desc) as spending_rank from orders group by CustomerID order by spending_rank;
++------------+-------------+---------------+
+| CustomerID | Expenditure | spending_rank |
++------------+-------------+---------------+
+|          1 |    53309.92 |             1 |
+|          4 |    34604.96 |             2 |
+|          8 |    29469.97 |             3 |
+|          3 |    26939.96 |             4 |
+|          5 |    12234.99 |             5 |
+|          2 |     9134.98 |             6 |
+|          7 |     4469.98 |             7 |
+|          6 |     1234.99 |             8 |
++------------+-------------+---------------+
+8 rows in set (0.00 sec)
+
+
+
+19. Get the top 3 customers based on the number of orders placed.
+
+mysql> select CustomerID from orders group by CustomerID limit 3;
++------------+
+| CustomerID |
++------------+
+|          1 |
+|          2 |
+|          3 |
++------------+
+3 rows in set (0.00 sec)
+
+
+20. For each product, find how many unique customers have purchased it.
+
+
+
+
+mysql> select orderdetails.ProductID, count( distinct orders.CustomerID) as unique_customers from orderdetails join orders on orderdetails.OrderID=orders.OrderID group by orderdetails.ProductID;
++-----------+------------------+
+| ProductID | unique_customers |
++-----------+------------------+
+|       101 |                4 |
+|       102 |                2 |
+|       103 |                5 |
+|       104 |                2 |
+|       105 |                3 |
++-----------+------------------+
+5 rows in set (0.00 sec)
+
+
+
 
