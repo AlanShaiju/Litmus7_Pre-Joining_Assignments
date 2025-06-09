@@ -1,0 +1,173 @@
+This file includes the changes made to the databse in assignment 1.
+
+
+mysql> use university_db;
+Database changed
+mysql> show tables
+    -> ;
++-------------------------+
+| Tables_in_university_db |
++-------------------------+
+| advisor                 |
+| courses                 |
+| registered_courses      |
+| student                 |
++-------------------------+
+4 rows in set (0.03 sec)
+
+mysql> rename table courses to course, registered_courses to enrollment;
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> show tables;
++-------------------------+
+| Tables_in_university_db |
++-------------------------+
+| advisor                 |
+| course                  |
+| enrollment              |
+| student                 |
++-------------------------+
+4 rows in set (0.00 sec)
+
+mysql> describe student;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| student_id   | int         | NO   | PRI | NULL    |       |
+| student_name | varchar(20) | YES  |     | NULL    |       |
+| student_mail | varchar(30) | YES  |     | NULL    |       |
+| student_dob  | date        | YES  |     | NULL    |       |
+| advisor_id   | int         | YES  | MUL | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> alter table student rename column student_name to name;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table student rename column student_mail to email;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table student rename column student_dob to dob;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe student;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| student_id | int         | NO   | PRI | NULL    |       |
+| name       | varchar(20) | YES  |     | NULL    |       |
+| email      | varchar(30) | YES  |     | NULL    |       |
+| dob        | date        | YES  |     | NULL    |       |
+| advisor_id | int         | YES  | MUL | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec
+
+mysql> describe advisor;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| advisor_id     | int         | NO   | PRI | NULL    |       |
+| name           | varchar(20) | YES  |     | NULL    |       |
+| email          | varchar(30) | YES  |     | NULL    |       |
+| specialization | varchar(20) | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table student add unique(email);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table advisor add unique(email);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table course add unique(title);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table course add unique(description);
+
+
+mysql> alter table course modify title varchar(20) not null;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table course modify description varchar(100) not null;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe course;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| course_code   | int          | NO   | PRI | NULL    |       |
+| title         | varchar(20)  | NO   | UNI | NULL    |       |
+| description   | varchar(100) | NO   | UNI | NULL    |       |
+| instructor_id | int          | YES  | MUL | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table enrollment add status tinyint(1) not null default 1, add constraint check_status check (status in (0,1));
+Query OK, 0 rows affected, 1 warning (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> describe enrollment;
++-------------+------------+------+-----+---------+-------+
+| Field       | Type       | Null | Key | Default | Extra |
++-------------+------------+------+-----+---------+-------+
+| student_id  | int        | NO   | PRI | NULL    |       |
+| course_code | int        | NO   | PRI | NULL    |       |
+| status      | tinyint(1) | NO   |     | 1       |       |
++-------------+------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table student modify column name varchar(30) not null;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table student modify column email varchar(50) not null;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desccribe student;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desccribe student' at line 1
+mysql> describe student;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| student_id | int         | NO   | PRI | NULL    |       |
+| name       | varchar(30) | NO   |     | NULL    |       |
+| email      | varchar(50) | NO   | UNI | NULL    |       |
+| dob        | date        | YES  |     | NULL    |       |
+| advisor_id | int         | YES  | MUL | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table advisor modify column name varchar(30) not null;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table advisor modify column specialization varchar(100) not null;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table advisor modify column email varchar(50) not null;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe advisor;
++----------------+--------------+------+-----+---------+-------+
+| Field          | Type         | Null | Key | Default | Extra |
++----------------+--------------+------+-----+---------+-------+
+| advisor_id     | int          | NO   | PRI | NULL    |       |
+| name           | varchar(30)  | NO   |     | NULL    |       |
+| email          | varchar(50)  | NO   | UNI | NULL    |       |
+| specialization | varchar(100) | NO   |     | NULL    |       |
++----------------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql>
+
