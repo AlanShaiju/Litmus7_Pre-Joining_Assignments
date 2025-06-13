@@ -59,8 +59,5 @@ public class Student {
 		System.out.println(getGrade());
 		
 	}
-	
-	public static void main(String[] args) {
-	}
 
 }
