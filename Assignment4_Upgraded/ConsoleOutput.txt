@@ -1,0 +1,77 @@
+--- Car List ---
+Toyota : Corolla
+Ford : Focus
+Chevrolet : Malibu
+
+--- Bike List ---
+Yamaha : R15
+Honda : CBR
+Suzuki : GSX
+
+--- Vehicle List ---
+Toyota : Corolla
+Ford : Focus
+Chevrolet : Malibu
+Yamaha : R15
+Honda : CBR
+Suzuki : GSX
+
+Rental Price for cars:150.5
+Rental Price for bikes:105.5
+Rental Pricce for all vehicles:256.0
+
+--- All Car Details ---
+Brand: Toyota | Model: Corolla | Rental Price/Day: 45.5 | Number of doors: 4 | Automatic: true
+Brand: Ford | Model: Focus | Rental Price/Day: 50.0 | Number of doors: 5 | Automatic: false
+Brand: Chevrolet | Model: Malibu | Rental Price/Day: 55.0 | Number of doors: 4 | Automatic: true
+
+--- All Bike Details ---
+Brand: Yamaha | Model: R15 | Rental Price/Day: 30.0 | Has Gear: true |Engine Capacity: 150 cc
+Brand: Honda | Model: CBR | Rental Price/Day: 35.5 | Has Gear: false |Engine Capacity: 250 cc
+Brand: Suzuki | Model: GSX | Rental Price/Day: 40.0 | Has Gear: true |Engine Capacity: 200 cc
+
+--- All Vehicle Details ---
+Brand: Toyota | Model: Corolla | Rental Price/Day: 45.5 | Number of doors: 4 | Automatic: true
+Brand: Ford | Model: Focus | Rental Price/Day: 50.0 | Number of doors: 5 | Automatic: false
+Brand: Chevrolet | Model: Malibu | Rental Price/Day: 55.0 | Number of doors: 4 | Automatic: true
+Brand: Yamaha | Model: R15 | Rental Price/Day: 30.0 | Has Gear: true |Engine Capacity: 150 cc
+Brand: Honda | Model: CBR | Rental Price/Day: 35.5 | Has Gear: false |Engine Capacity: 250 cc
+Brand: Suzuki | Model: GSX | Rental Price/Day: 40.0 | Has Gear: true |Engine Capacity: 200 cc
+--- Enter Car Details ---
+Enter the brand: Honda
+Enter the model: City
+Enter the rental price per day: 54.7
+Enter the number of doors: 4
+Is it automatic (true/false)?: true
+--- Enter Bike Details ---
+Enter the brand: Ultraviolette
+Enter the model: Mach77
+Enter the rental price per day: 43.9
+Does it have gears (true/false)?: false
+Enter engine capacity (cc): 0
+--- Car List ---
+Toyota : Corolla
+Ford : Focus
+Chevrolet : Malibu
+Honda : City
+
+--- Bike List ---
+Yamaha : R15
+Honda : CBR
+Suzuki : GSX
+Ultraviolette : Mach77
+
+--- Vehicle List ---
+Toyota : Corolla
+Ford : Focus
+Chevrolet : Malibu
+Honda : City
+Yamaha : R15
+Honda : CBR
+Suzuki : GSX
+Ultraviolette : Mach77
+
+Rental Price for cars:205.2
+Rental Price for bikes:149.4
+Rental Pricce for all vehicles:354.6
+
