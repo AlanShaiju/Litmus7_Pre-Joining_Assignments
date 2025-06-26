@@ -1,6 +1,6 @@
 package com.litmus7.vehiclerentalsystem;
 
-import com.litmus7.vehiclerentalsystem.servicelayer.VehicleService;
+import com.litmus7.vehiclerentalsystem.service.VehicleService;
 
 /**
  * We create an object of type "VehicleService" to simulate the different
