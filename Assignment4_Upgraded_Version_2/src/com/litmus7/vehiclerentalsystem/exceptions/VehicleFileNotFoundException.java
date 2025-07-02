@@ -1,6 +1,5 @@
 package com.litmus7.vehiclerentalsystem.exceptions;
 
-import java.io.IOException;
 
 /**
  * This class file defines an exception that occurs when the file associated
@@ -11,9 +10,12 @@ import java.io.IOException;
  * @since 2025-06-29
  */
 
-public class VehicleFileNotFoundException extends IOException {
-
+public class VehicleFileNotFoundException extends Exception {
 	public VehicleFileNotFoundException(String string) {
 		super(string);
+	}
+
+	public VehicleFileNotFoundException(String string, Throwable cause) {
+		super(string, cause);
 	}
 }

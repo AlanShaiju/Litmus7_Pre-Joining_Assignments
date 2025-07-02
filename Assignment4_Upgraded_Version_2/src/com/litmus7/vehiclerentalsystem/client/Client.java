@@ -16,8 +16,8 @@ import java.util.Scanner;
  * 
  * 
  * @author Alan Shaiju Kurian
- * @version 1.0
- * @since 2025-06-27
+ * @version 2.0
+ * @since 2025-07-02
  */
 public class Client {
 	// We set the value for SUCCESS_CODE so that we can compare it later when we
@@ -44,9 +44,9 @@ public class Client {
 		// display the error.
 		if (status.getStatus_code() == SUCCESS_CODE) {
 			status = controller.getListOfCars();
-			listOfCars = status.getData();
+			listOfCars = (List<Car>) status.getData();
 			status = controller.getListOfBikes();
-			listOfBikes = status.getData();
+			listOfBikes = (List<Bike>) status.getData();
 
 			System.out.println("--- Car List ---");
 			for (Car car : listOfCars)
@@ -63,11 +63,11 @@ public class Client {
 				System.out.println(bike.getBrand() + " | " + bike.getModel());
 			System.out.println();
 			status = controller.getRentalPriceCar();
-			System.out.println("Rental Price for cars:" + status.getTotalRentalPrice());
+			System.out.println("Rental Price for cars:" + status.getData());
 			status = controller.getRentalPriceBike();
-			System.out.println("Rental Price for bikes:" + status.getTotalRentalPrice());
+			System.out.println("Rental Price for bikes:" + status.getData());
 			status = controller.getRentalPriceVehicles();
-			System.out.println("Rental Price for all vehicles:" + status.getTotalRentalPrice());
+			System.out.println("Rental Price for all vehicles:" + status.getData());
 			System.out.println();
 			// Adding Car
 			System.out.print("Enter car brand:");
@@ -104,9 +104,9 @@ public class Client {
 					System.out.println(status.getMessage());
 
 					status = controller.getListOfCars();
-					listOfCars = status.getData();
+					listOfCars = (List<Car>) status.getData();
 					status = controller.getListOfBikes();
-					listOfBikes = status.getData();
+					listOfBikes = (List<Bike>) status.getData();
 
 					System.out.println("--- Car List ---");
 					for (Car car : listOfCars)
@@ -123,11 +123,11 @@ public class Client {
 						System.out.println(bike.getBrand() + " | " + bike.getModel());
 					System.out.println();
 					status = controller.getRentalPriceCar();
-					System.out.println("Rental Price for cars:" + status.getTotalRentalPrice());
+					System.out.println("Rental Price for cars:" + status.getData());
 					status = controller.getRentalPriceBike();
-					System.out.println("Rental Price for bikes:" + status.getTotalRentalPrice());
+					System.out.println("Rental Price for bikes:" + status.getData());
 					status = controller.getRentalPriceVehicles();
-					System.out.println("Rental Price for all vehicles:" + status.getTotalRentalPrice());
+					System.out.println("Rental Price for all vehicles:" + status.getData());
 					System.out.println();
 				} else {
 					System.out.println(status.getE() + " | " + status.getMessage());

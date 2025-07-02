@@ -1,9 +1,9 @@
 package com.litmus7.vehiclerentalsystem.controller;
 
-import java.util.List;
 import com.litmus7.vehiclerentalsystem.dto.*;
 import com.litmus7.vehiclerentalsystem.exceptions.CannotAddBikeException;
 import com.litmus7.vehiclerentalsystem.exceptions.CannotAddCarException;
+import com.litmus7.vehiclerentalsystem.exceptions.InconsistentDataErrorException;
 import com.litmus7.vehiclerentalsystem.exceptions.NoSourceFileException;
 import com.litmus7.vehiclerentalsystem.exceptions.VehicleFileNotFoundException;
 import com.litmus7.vehiclerentalsystem.service.VehicleService;
@@ -14,8 +14,8 @@ import com.litmus7.vehiclerentalsystem.service.VehicleService;
  * perform basic set of validations before requesting data from the next layer.
  * 
  * @author Alan Shaiju Kurian
- * @version 1.0
- * @since 2025-06-29
+ * @version 2.0
+ * @since 2025-07-02
  */
 
 public class VehicleController {
@@ -53,6 +53,10 @@ public class VehicleController {
 			// This catch block returns the response to the Exception generated if there is
 			// no source file.
 			return Response.failure(FAILURE_CODE, "No Source File", e);
+		} catch (InconsistentDataErrorException e) {
+			// Returns a response indicating the data read is incorrect and does not match
+			// the required data type.
+			return Response.failure(FAILURE_CODE, "Inconsistent data", e);
 		}
 	}
 
@@ -87,13 +91,18 @@ public class VehicleController {
 		// This method is used to add a car object to the existing list of cars.
 		// Initial validation checks if any field is empty.
 		// If no field is empty then the car is added to the list.
+		// We also check if there exists a car of same model and brand.
 		if (brand == "" || model == "" || rentalPricePerDay <= 0 || numberOfDoors <= 0) {
 			return Response.failure(FAILURE_CODE, "Cannot add car | Incomplete Details",
 					new CannotAddCarException("Incomplete Details"));
 		} else {
+			try {
+				return Response.success(SUCCESS_CODE,
+						service.addCar(brand, model, rentalPricePerDay, numberOfDoors, isAutomatic));
 
-			return Response.success(SUCCESS_CODE,
-					service.addCar(brand, model, rentalPricePerDay, numberOfDoors, isAutomatic));
+			} catch (Exception e) {
+				return Response.failure(FAILURE_CODE, e.getMessage(), e);
+			}
 		}
 
 	}
@@ -102,12 +111,18 @@ public class VehicleController {
 		// This method is used to add a car object to the existing list of bikes.
 		// Initial validation checks if any field is empty.
 		// If no field is empty then the bike is added to the list.
+		// We also check if there exists a bike of same model and car.
 		if (brand == "" || model == "" | rentalPricePerDay <= 0 || engineCapacity < 0) {
 			return Response.failure(FAILURE_CODE, "Cannot add bike | Incomplete Details",
 					new CannotAddBikeException("Incomplete Details"));
 		} else {
-			return Response.success(SUCCESS_CODE,
-					service.addBike(brand, model, rentalPricePerDay, hasGear, engineCapacity));
+			try {
+				return Response.success(SUCCESS_CODE,
+						service.addBike(brand, model, rentalPricePerDay, hasGear, engineCapacity));
+			} catch (Exception e) {
+				return Response.failure(FAILURE_CODE, e.getMessage(), e);
+			}
+
 		}
 
 	}

@@ -9,8 +9,8 @@ import java.util.List;
  * constructors that can be used based on the different scenarios.
  * 
  * @author Alan Shaiju Kurian
- * @version 1.0
- * @since 2025-06-29
+ * @version 2.0
+ * @since 2025-07-02
  */
 
 public class Response<T> {
@@ -25,17 +25,12 @@ public class Response<T> {
 	 *                         layers.
 	 * @param totalRentalPrice : stores the rental price data that needs to be
 	 *                         communicated across the layers.
-	 * @param model            : Stores the model associated with the vehicle.
-	 * @param brand            : Stores the brand associated with the vehicle.
 	 * @param e                : Stores the exception that is generated and passed
 	 *                         on using the methods of the Response class.
 	 */
 	private int status_code;
 	private String message;
-	private List<T> data;
-	private double totalRentalPrice;
-	private String model;
-	private String brand;
+	private T data;
 	private Exception e;
 
 	// Its a default constructor.
@@ -52,21 +47,12 @@ public class Response<T> {
 	}
 
 	// Its a constructor used when the object made has only parameters
-	// "status_code", "message", and "data"(ArrayList of objects).
-	public Response(int status_code, String message, List<T> data) {
+	// "status_code", "message", and "data".
+	public Response(int status_code, String message, T data) {
 		// constructor to get data such as car list, bike list
 		this.status_code = status_code;
 		this.message = message;
 		this.data = data;
-	}
-
-	// Its a constructor used when the object made has only parameters
-	// "status_code", "message", and "totalRentalPrice".
-	public Response(int status_code, String message, double totalRentalPrice) {
-		// constructor to get data of type int.
-		this.status_code = status_code;
-		this.message = message;
-		this.totalRentalPrice = totalRentalPrice;
 	}
 
 	// Its a constructor used when the object made has only parameters
@@ -84,14 +70,8 @@ public class Response<T> {
 	}
 
 	// Method used to generate an object of type Response when the object made has
-	// only parameters "status_code", "message", and "totalRentalPrice".
-	public static Response success(int status_code, String message, double totalRentalPrice) {
-		return new Response(status_code, message, totalRentalPrice);
-	}
-
-	// Method used to generate an object of type Response when the object made has
-	// only parameters "status_code", "message", and "data"(ArrayList of objects).
-	public static <T> Response<T> success(int status_code, String message, List<T> data) {
+	// only parameters "status_code", "message", and "data".
+	public static <T> Response<T> success(int status_code, String message, T data) {
 		return new Response<>(status_code, message, data);
 	}
 
@@ -112,43 +92,13 @@ public class Response<T> {
 	}
 
 	// Method used to retrieve the value for "data".
-	public List<T> getData() {
+	public T getData() {
 		return data;
 	}
 
 	// Method used to set the value for "data".
-	public void setData(List<T> data) {
+	public void setData(T data) {
 		this.data = data;
-	}
-
-	// Method used to retrieve the value for "totalRentalPrice".
-	public double getTotalRentalPrice() {
-		return totalRentalPrice;
-	}
-
-	// Method used to set the value for "totalRentalPrice".
-	public void setTotalRentalPrice(int totalRentalPrice) {
-		this.totalRentalPrice = totalRentalPrice;
-	}
-
-	// Method used to retrieve the value for "model".
-	public String getModel() {
-		return model;
-	}
-
-	// Method used to set the value for "model".
-	public void setModel(String model) {
-		this.model = model;
-	}
-
-	// Method used to retrieve the value for "brand".
-	public String getBrand() {
-		return brand;
-	}
-
-	// Method used to set the value for "brand".
-	public void setBrand(String brand) {
-		this.brand = brand;
 	}
 
 	// Method used to retrieve the value for "e".

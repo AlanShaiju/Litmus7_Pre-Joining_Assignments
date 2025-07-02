@@ -13,4 +13,8 @@ public class CannotAddBikeException extends Exception {
 	public CannotAddBikeException(String string) {
 		super(string);
 	}
+
+	public CannotAddBikeException(String string, Throwable cause) {
+		super(string, cause);
+	}
 }

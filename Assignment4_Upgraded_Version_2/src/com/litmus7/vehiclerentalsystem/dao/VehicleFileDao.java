@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.litmus7.vehiclerentalsystem.dto.Bike;
 import com.litmus7.vehiclerentalsystem.dto.Car;
+import com.litmus7.vehiclerentalsystem.exceptions.InconsistentDataErrorException;
 import com.litmus7.vehiclerentalsystem.exceptions.VehicleFileNotFoundException;
 
 /**
@@ -18,8 +19,8 @@ import com.litmus7.vehiclerentalsystem.exceptions.VehicleFileNotFoundException;
  * (VehicleFileDao) to the upper layers in the application.
  * 
  * @author Alan Shaiju Kurian
- * @version 1.0
- * @since 2025-06-29
+ * @version 2.0
+ * @since 2025-07-02
  */
 
 public class VehicleFileDao {
@@ -39,7 +40,8 @@ public class VehicleFileDao {
 	List<Car> listOfCars = new ArrayList<Car>();
 	List<Bike> listOfBikes = new ArrayList<Bike>();
 
-	public String loadVehiclesFromFile(String filePath) throws VehicleFileNotFoundException {
+	public String loadVehiclesFromFile(String filePath)
+			throws VehicleFileNotFoundException, InconsistentDataErrorException {
 		/**
 		 * This method reads the data from a file and stores the data into the
 		 * parameters listOfCars and listOfBikes. Data is read and stored accordingly.
@@ -66,7 +68,10 @@ public class VehicleFileDao {
 		} catch (IOException e) {
 			// If the file was not found then we throw the custom exception
 			// "VehicleNotFoundException".
-			throw new VehicleFileNotFoundException("File Was Not Found" + e);
+			throw new VehicleFileNotFoundException("File Was Not Found", e);
+		} catch (Exception e) {
+			//The data read does not match required type.
+			throw new InconsistentDataErrorException("Entered data does not match required datatype", e);
 		}
 	}
 

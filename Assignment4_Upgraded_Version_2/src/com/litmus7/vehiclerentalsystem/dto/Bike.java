@@ -5,8 +5,8 @@ package com.litmus7.vehiclerentalsystem.dto;
  * associated with any bike, and it extends the superclass 'Vehicle'.
  * 
  * @author Alan Shaiju Kurian
- * @version 1.0
- * @since 2025-06-27
+ * @version 2.0
+ * @since 2025-07-02
  */
 
 public class Bike extends Vehicle {
@@ -60,6 +60,14 @@ public class Bike extends Vehicle {
 		super(brand, model, rentalPricePerDay);
 		this.hasGear = hasGear;
 		this.engineCapacity = engineCapacity;
+	}
+
+	public boolean equals(Object obj) {
+		//Checks if objects are equal
+		if (this == obj)
+			return true;
+		Bike that = (Bike) obj;
+		return this.getBrand().equalsIgnoreCase(that.getBrand()) && this.getModel().equalsIgnoreCase(that.getModel());
 	}
 
 	public String toString() {

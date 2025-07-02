@@ -1,6 +1,9 @@
 package com.litmus7.vehiclerentalsystem.service;
 
 import com.litmus7.vehiclerentalsystem.dto.Car;
+import com.litmus7.vehiclerentalsystem.exceptions.CannotAddBikeException;
+import com.litmus7.vehiclerentalsystem.exceptions.CannotAddCarException;
+import com.litmus7.vehiclerentalsystem.exceptions.InconsistentDataErrorException;
 import com.litmus7.vehiclerentalsystem.exceptions.VehicleFileNotFoundException;
 import com.litmus7.vehiclerentalsystem.dao.VehicleFileDao;
 import com.litmus7.vehiclerentalsystem.dto.Bike;
@@ -13,8 +16,8 @@ import java.util.List;
  * the different details via the "VehicleFileDao" object.
  * 
  * @author Alan Shaiju Kurian
- * @version 1.0
- * @since 2025-06-29
+ * @version 2.0
+ * @since 2025-07-02
  */
 
 public class VehicleService {
@@ -27,7 +30,8 @@ public class VehicleService {
 
 	private VehicleFileDao dao = new VehicleFileDao();
 
-	public String loadVehiclesFromFile(String filePath) throws VehicleFileNotFoundException {
+	public String loadVehiclesFromFile(String filePath)
+			throws VehicleFileNotFoundException, InconsistentDataErrorException {
 		/**
 		 * This method calls the method "loadVehiclesFromFile" of the "VehicleFileDao"
 		 * object.
@@ -50,22 +54,32 @@ public class VehicleService {
 		return dao.getListOfBikes();
 	}
 
-	public String addCar(String brand, String model, double rentalPricePerDay, int numberOfDoors, boolean isAutomatic) {
+	public String addCar(String brand, String model, double rentalPricePerDay, int numberOfDoors, boolean isAutomatic)
+			throws CannotAddCarException {
 		/**
 		 * This method creates a new car object based on the values received and calls
-		 * the method "addCar" of the "VehicleFileDao" object.
+		 * the method "addCar" of the "VehicleFileDao" object after the initial check is
+		 * complete.
 		 */
 		Car car = new Car(brand, model, rentalPricePerDay, numberOfDoors, isAutomatic);
+		if (dao.getListOfCars().contains(car)) {
+			throw new CannotAddCarException("Car already exists");
+		}
 		return dao.addCar(car);
 
 	}
 
-	public String addBike(String brand, String model, double rentalPricePerDay, boolean hasGear, int engineCapacity) {
+	public String addBike(String brand, String model, double rentalPricePerDay, boolean hasGear, int engineCapacity)
+			throws CannotAddBikeException {
 		/**
 		 * This method creates a new bike object based on the values received and calls
-		 * the method "addBike" of the "VehicleFileDao" object.
+		 * the method "addBike" of the "VehicleFileDao" object after the initial check
+		 * is complete.
 		 */
 		Bike bike = new Bike(brand, model, rentalPricePerDay, hasGear, engineCapacity);
+		if (dao.getListOfBikes().contains(bike)) {
+			throw new CannotAddBikeException("Bike already exists");
+		}
 		return dao.addBike(bike);
 
 	}

@@ -13,4 +13,8 @@ public class CannotAddCarException extends Exception {
 	public CannotAddCarException(String string) {
 		super(string);
 	}
+
+	public CannotAddCarException(String string, Throwable cause) {
+		super(string, cause);
+	}
 }

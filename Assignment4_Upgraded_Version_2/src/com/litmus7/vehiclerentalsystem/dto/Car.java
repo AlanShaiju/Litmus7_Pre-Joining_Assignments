@@ -5,8 +5,8 @@ package com.litmus7.vehiclerentalsystem.dto;
  * associated with any car, and it extends the superclass 'Vehicle'.
  * 
  * @author Alan Shaiju Kurian
- * @version 1.0
- * @since 2025-06-29
+ * @version 2.0
+ * @since 2025-07-02
  */
 
 public class Car extends Vehicle {
@@ -62,6 +62,14 @@ public class Car extends Vehicle {
 		super(brand, model, rentalPricePerDay);
 		this.numberOfDoors = numberOfDoors;
 		this.isAutomatic = isAutomatic;
+	}
+
+	public boolean equals(Object obj) {
+		// checks if objects are equal
+		if (this == obj)
+			return true;
+		Car that = (Car) obj;
+		return this.getBrand().equalsIgnoreCase(that.getBrand()) && this.getModel().equalsIgnoreCase(that.getModel());
 	}
 
 	public String toString() {
