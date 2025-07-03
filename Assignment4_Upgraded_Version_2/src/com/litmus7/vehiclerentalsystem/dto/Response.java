@@ -23,8 +23,6 @@ public class Response<T> {
 	 *                         across the layers
 	 * @param data             : stores the data that needs to be sent across the
 	 *                         layers.
-	 * @param totalRentalPrice : stores the rental price data that needs to be
-	 *                         communicated across the layers.
 	 * @param e                : Stores the exception that is generated and passed
 	 *                         on using the methods of the Response class.
 	 */
