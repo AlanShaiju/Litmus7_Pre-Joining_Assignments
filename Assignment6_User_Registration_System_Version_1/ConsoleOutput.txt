@@ -1,0 +1,7 @@
+Enter username:Sarah
+Enter password:sarah234
+Enter email:sarahran@gmail.com
+Enter age:27
+User has been registered
+User data retrieved
+Username:Sarah | Password:sarah234 | Email:sarahran@gmail.com | Age:27
