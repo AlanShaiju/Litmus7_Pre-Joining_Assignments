@@ -1,0 +1,98 @@
+---  Retail Product Catalog Manager  ---
+---  Options  ---
+1. Add Product
+2. View Product by ID
+3. View all products
+4. Update Product
+5. Delete Product
+6. Exit Application
+Enter Choice:
+1
+Enter product details:
+Enter Product ID:300
+Enter Product Name:Textbook
+Enter Category:Stationary
+Enter Price:34.8
+Enter Stock Quantity:345
+Success in adding data to database.
+---  Options  ---
+1. Add Product
+2. View Product by ID
+3. View all products
+4. Update Product
+5. Delete Product
+6. Exit Application
+Enter Choice:
+3
+---  All products in catalog  ---
+ProductId:100 | Name:Notebook | Category:Stationary | Price25.0 | Stock Quantity:456
+ProductId:200 | Name:Pencil | Category:Stationary | Price12.5 | Stock Quantity:490
+ProductId:300 | Name:Textbook | Category:Stationary | Price34.8 | Stock Quantity:345
+---  Options  ---
+1. Add Product
+2. View Product by ID
+3. View all products
+4. Update Product
+5. Delete Product
+6. Exit Application
+Enter Choice:
+2
+Enter the productId to search:200
+---  Product Details  ---
+ID:200
+Name:Pencil
+Category:Stationary
+Price:12.5
+Stock:490
+---  Options  ---
+1. Add Product
+2. View Product by ID
+3. View all products
+4. Update Product
+5. Delete Product
+6. Exit Application
+Enter Choice:
+5
+Enter product ID to delete:
+200
+Data has been deleted
+---  Options  ---
+1. Add Product
+2. View Product by ID
+3. View all products
+4. Update Product
+5. Delete Product
+6. Exit Application
+Enter Choice:
+4
+Enter product ID to update:
+100
+Enter new name(Current name:Notebook):Notebook
+Enter new category(Current category:Stationary):Stationary
+Enter new price(Current price:25.0):23.77
+Enter new stock(Current stockQuantity:456):444
+Success in updating data in database.
+---  Options  ---
+1. Add Product
+2. View Product by ID
+3. View all products
+4. Update Product
+5. Delete Product
+6. Exit Application
+Enter Choice:
+3
+---  All products in catalog  ---
+ProductId:100 | Name:Notebook | Category:Stationary | Price23.77 | Stock Quantity:444
+ProductId:300 | Name:Textbook | Category:Stationary | Price34.8 | Stock Quantity:345
+---  Options  ---
+1. Add Product
+2. View Product by ID
+3. View all products
+4. Update Product
+5. Delete Product
+6. Exit Application
+Enter Choice:
+6
+Exiting application
+Thank you for using RetailMart Product Catalog Manager.
+Goodbye!
